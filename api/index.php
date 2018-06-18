@@ -1,11 +1,8 @@
 <?php
 session_start();
-require('../vendor/autoload.php');
-$app = new Silex\Application();
 require_once "connect.php";
-$app->get('/api/', function() use($app) {
-    $db = $app['pdo'];
-    if(!isset($_SESSION['score'])) $_SESSION['score'] = 0;
+
+if(!isset($_SESSION['score'])) $_SESSION['score'] = 0;
 
 $prephotos = $db->prepare("SELECT * FROM photos");
 $prephotos->execute();
@@ -65,6 +62,3 @@ $arrjson = array(
 $json = json_encode($arrjson,JSON_UNESCAPED_UNICODE);
 
 echo $json;
-  });
-  
-  $app->run();

@@ -1,16 +1,15 @@
 <?php
 
 //$connect = require_once 'host.php';
-$dbopts = parse_url(getenv('DATABASE_URL'));
-$app->register(new Csanquer\Silex\PdoServiceProvider\Provider\PDOServiceProvider('pdo'),
-               array(
-                'pdo.server' => array(
-                   'driver'   => 'pgsql',
-                   'user' => $dbopts["user"],
-                   'password' => $dbopts["pass"],
-                   'host' => $dbopts["host"],
-                   'port' => $dbopts["port"],
-                   'dbname' => ltrim($dbopts["path"],'/')
-                   )
-               )
-);
+$connect = parse_url(getenv('DATABASE_URL'));
+$dbname = ltrim($dbopts["path"],'/');
+try{
+    $db = new PDO(
+        "pgsql:host=$connect['host'];port=$connect['port'];dbname=$dbname;user=$connect['user'];password=$connect['pass']"
+    );
+    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+}
+catch(PDOException $e){
+    echo "Error: ".$e->getMessage();
+    exit();
+}   
