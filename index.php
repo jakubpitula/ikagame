@@ -1,7 +1,6 @@
 <?php
 require_once "select.php";
 /*
-TODO:
 + tabela z uczniami i tabela ze zdjęciami (linki do plików)
 + alternatywne wersje imion
 - frontend Krystian
