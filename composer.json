@@ -1,7 +1,8 @@
 {
 	"name": "multitest",
 	"require": {
-		"monolog/monolog": "~1.8"
+		"monolog/monolog": "~1.8",
+		"csanquer/pdo-service-provider": "~1.1dev"
 	},
 	"require-dev": {
 		"heroku/heroku-buildpack-php": "*"
