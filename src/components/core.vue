@@ -39,7 +39,6 @@ export default {
             fetch(this.person.addr, {mode: 'cors'})
                 .then(response => response.blob(), (err) =>{throw new Error("Image fetch failed: " + err);})
                 .then(blob => {
-                    console.log(blob);
                     let imgaddr = window.URL.createObjectURL(blob);
                     this.imagesrc = imgaddr;       
                     this.imageCollapsed = false;

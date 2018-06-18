@@ -27,25 +27,23 @@ export default {
     setData:function(obj){
       this.ready_ = true;
       if(this.counter != obj.counter)
-        throw new Error("oops counters dont match " + this.counter  + "/" + obj.counter);
+        console.warn("Counters dont match (" + this.counter  + " vs " + obj.counter + ")");
       this.bus.$emit('update', obj);
     },
     getData:function(){
       let component = this;
       fetch("/api/").then(function(res){
         if(res.ok){
-          try{
-            return res.json();
-          } catch(err) {
-            res.text().then(text => {throw new Error("Error with the JSON: " + err + "\n\nResponse from server:\n");});
-          }
+          res.clone().json().then(js=>{component.setData(js)}, err=>{
+            res.text().then(text => {throw new Error("Error with the JSON: " + err + "\n\nResponse from server:\n" + text)});
+          });
         } else {
-          res.text().then(text => {throw new Error("Error getting data. Response code was not ok :c\n\nResponse from server:\n");});
+          res.text().then(text => {throw new Error("Error getting data. Response code was not ok :c\n\nResponse from server:\n" + text)});
         }
       }, function(err){
         throw new Error("Fetch failed: " + err);
       }).then(function(js){
-        component.setData(js);
+        
       });
     },
     process: function(obj){
