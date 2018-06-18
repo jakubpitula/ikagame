@@ -5,7 +5,7 @@ $dbopts = parse_url(getenv('DATABASE_URL'));
 try{
 
     $db = new PDO(
-        "mysql:dbname={$dbopts['db']};host={$dbopts['host']};charset={$dbopts['charset']}", 
+        "mysql:dbname={$dbopts['db']};host={$dbopts['host']};charset={utf8}", 
         $dbopts['user'], $dbopts['password']
     );
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
