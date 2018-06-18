@@ -1,7 +1,9 @@
 <?php
 session_start();
+require('../vendor/autoload.php');
+$app = new Silex\Application();
 require_once "connect.php";
-$app->get('/db/', function() use($app) {
+$app->get('/api/', function() use($app) {
     $db = $app['pdo'];
     if(!isset($_SESSION['score'])) $_SESSION['score'] = 0;
 
@@ -65,3 +67,4 @@ $json = json_encode($arrjson,JSON_UNESCAPED_UNICODE);
 echo $json;
   });
   
+  $app->run();
