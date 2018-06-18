@@ -27,19 +27,23 @@ export default {
     setData:function(obj){
       this.ready_ = true;
       if(this.counter != obj.counter)
-        alert("oops counters dont match " + this.counter  + "/" + obj.counter);
+        console.log("oops counters dont match " + this.counter  + "/" + obj.counter);
       this.bus.$emit('update', obj);
     },
     getData:function(){
       let component = this;
       fetch("/api").then(function(res){
+        try{
         return res.json();
+        } catch(err) {
+          console.log("Error with the JSON: " + err);
+        }
       }, function(err){
-        alert("oops " + err);
+        console.log("oops " + err);
       }).then(function(js){
         component.setData(js);
       });
-      //alert("sent");
+      //console.log("sent");
     },
     process: function(obj){
       this.counter++;
@@ -47,7 +51,7 @@ export default {
       this.prog = (100/32)*counter;
     },
     initialize:function(){
-      //alert("in");
+      //console.log("in");
       this.getData();
     }
   },
