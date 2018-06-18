@@ -2,15 +2,15 @@
 
 //$connect = require_once 'host.php';
 $dbopts = parse_url(getenv('DATABASE_URL'));
-try{
-
-    $db = new PDO(
-        "pgsql:dbname={$dbopts['db']};host={$dbopts['host']}", 
-        $dbopts['user'], $dbopts['password']
-    );
-    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-}
-catch(PDOException $e){
-    echo "Error: ".$e->getMessage();
-    exit();
-}   
+$app->register(new Csanquer\Silex\PdoServiceProvider\Provider\PDOServiceProvider('pdo'),
+               array(
+                'pdo.server' => array(
+                   'driver'   => 'pgsql',
+                   'user' => $dbopts["user"],
+                   'password' => $dbopts["pass"],
+                   'host' => $dbopts["host"],
+                   'port' => $dbopts["port"],
+                   'dbname' => ltrim($dbopts["path"],'/')
+                   )
+               )
+);

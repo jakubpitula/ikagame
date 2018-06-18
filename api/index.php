@@ -1,8 +1,9 @@
 <?php
 session_start();
 require_once "connect.php";
-
-if(!isset($_SESSION['score'])) $_SESSION['score'] = 0;
+$app->get('/db/', function() use($app) {
+    $db = $app['pdo'];
+    if(!isset($_SESSION['score'])) $_SESSION['score'] = 0;
 
 $prephotos = $db->prepare("SELECT * FROM photos");
 $prephotos->execute();
@@ -62,3 +63,5 @@ $arrjson = array(
 $json = json_encode($arrjson,JSON_UNESCAPED_UNICODE);
 
 echo $json;
+  });
+  
