@@ -37,22 +37,19 @@ export default {
         updateImage:function(){
             this.imageCollapsed = true;
             fetch(this.person.addr, {mode: 'cors'})
-                .then(response => response.blob())
+                .then(response => response.blob(), (err) =>{throw new Error("Image fetch failed: " + err);})
                 .then(blob => {
-                    console.log(blob);
                     let imgaddr = window.URL.createObjectURL(blob);
                     this.imagesrc = imgaddr;       
                     this.imageCollapsed = false;
-            });
+            }, (err) =>{throw new Error("Something with the blob: " + err);});
         }
   },
   mounted:function(){
-      //alert("in-0");
       this.bus.$on('update', (obj)=>{
           this.person = obj;
           this.updateImage();
       });
-      //alert("in0");
       this.$emit('loaded');
   }
 };

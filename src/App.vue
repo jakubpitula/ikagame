@@ -15,6 +15,7 @@ export default {
     return{
       bus:new Vue(),
       prog:0,
+      counter:0,
       ready_:false
     }
   },
@@ -25,25 +26,32 @@ export default {
   methods:{
     setData:function(obj){
       this.ready_ = true;
+      if(this.counter != obj.counter)
+        console.warn("Counters dont match (" + this.counter  + " vs " + obj.counter + ")");
       this.bus.$emit('update', obj);
     },
     getData:function(){
       let component = this;
-      fetch("http://aplikacjejs.fc.pl/test_data").then(function(res){
-        return res.json();
+      fetch("/api/").then(function(res){
+        if(res.ok){
+          res.clone().json().then(js=>{component.setData(js)}, err=>{
+            res.text().then(text => {throw new Error("Error with the JSON: " + err + "\n\nResponse from server:\n" + text)});
+          });
+        } else {
+          res.text().then(text => {throw new Error("Error getting data. Response code was not ok :c\n\nResponse from server:\n" + text)});
+        }
       }, function(err){
-        alert("oops " + err);
+        throw new Error("Fetch failed: " + err);
       }).then(function(js){
-        component.setData(js);
+        
       });
-      //alert("sent");
     },
     process: function(obj){
+      this.counter++;
       this.getData();
-      this.prog+=3.125;
+      this.prog = (100/32)*counter;
     },
     initialize:function(){
-      //alert("in");
       this.getData();
     }
   },
