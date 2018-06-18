@@ -27,24 +27,27 @@ export default {
     setData:function(obj){
       this.ready_ = true;
       if(this.counter != obj.counter)
-        console.log("oops counters dont match " + this.counter  + "/" + obj.counter);
+        throw new Error("oops counters dont match " + this.counter  + "/" + obj.counter);
       this.bus.$emit('update', obj);
     },
     getData:function(){
       let component = this;
       fetch("/api").then(function(res){
-        try{
-          let ret = res.json();
-        return ret;
-        } catch(err) {
-          console.log("Error with the JSON: " + err);
+        if(res.ok){
+          try{
+            return res.json();
+          } catch(err) {
+            throw new Error("Error with the JSON: " + err);
+          }
+        } else {
+          throw new Error("Error getting data. Response code was not ok :c");
         }
+        
       }, function(err){
-        console.log("oops " + err);
+        throw new Error("Fetch failed: " + err);
       }).then(function(js){
         component.setData(js);
       });
-      //console.log("sent");
     },
     process: function(obj){
       this.counter++;
@@ -52,7 +55,6 @@ export default {
       this.prog = (100/32)*counter;
     },
     initialize:function(){
-      //console.log("in");
       this.getData();
     }
   },
