@@ -15,6 +15,8 @@ $min = 0;
 if(!isset($_SESSION['actual'])) $_SESSION['actual'] = 0;
 if(!isset($_SESSION['randomized'])) $_SESSION['randomized']=array();
 
+#$_SESSION['actual'] jako licznik
+
 $tab=$_SESSION['randomized'];
 
 if($_SESSION['actual']>$max){
@@ -41,9 +43,28 @@ do{
 
 }while(!$ok);
 
-
 $photorec = $_SESSION['photos'][$res];
-$photo = $photorec['photo'];
+$photo = $photorec['photo']; // link do zdjecia
+
+$corrects = $db->prepare(
+    "SELECT name, surname FROM classmates WHERE id=:id"
+);
+$corrects->bindValue(':id', $res+1);
+$corrects->execute();
+
+$namejson = $corrects->fetch(PDO::FETCH_ASSOC);
+
+$arrjson = array(
+    'imie' => $namejson['name'],
+    'nazwisko' => $namejson['surname'],
+    'addr' => $photo,
+    'counter' => $_SESSION['actual']
+);
+
+$json = json_encode($arrjson,JSON_UNESCAPED_UNICODE);
+
+echo $json;
+
 $_SESSION['photorec'] = $photorec;
 }
 else {
