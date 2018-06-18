@@ -34,7 +34,8 @@ export default {
       let component = this;
       fetch("/api").then(function(res){
         try{
-        return res.json();
+          let ret = res.json();
+        return ret;
         } catch(err) {
           console.log("Error with the JSON: " + err);
         }
