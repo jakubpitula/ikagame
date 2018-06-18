@@ -11,6 +11,7 @@ function altName($name){
         case 'Stasiu':
         case 'Staś':
         case 'Stachu':
+        case 'Stachuj':
             return 'Stanisław';
             
         case 'Wojtek':
