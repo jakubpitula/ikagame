@@ -1,1 +1,1 @@
-web: vendor/bin/heroku-php-apache2 & npm run build
+web: vendor/bin/heroku-php-apache2 api -C httpd.conf & npm run build
