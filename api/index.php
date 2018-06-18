@@ -1,5 +1,7 @@
 <?php
-session_start();
+require('../vendor/autoload.php')
+var_dump($app);
+/*session_start();
 require_once "connect.php";
 
 if(!isset($_SESSION['score'])) $_SESSION['score'] = 0;
