@@ -5,10 +5,5 @@
 	},
 	"require-dev": {
 		"heroku/heroku-buildpack-php": "*"
-	},
-	"scripts": {
-		"compile": [
-			"bower install"
-		]
 	}
 }
