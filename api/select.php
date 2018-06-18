@@ -22,10 +22,8 @@ $tab=$_SESSION['randomized'];
 if($_SESSION['actual']>$max){
     unset($_SESSION['actual']);
     unset($_SESSION['randomized']);
-    header('Location: results.php');
-    exit();
 }
-if(!isset($_SESSION['bug'])){
+
 do{
     $ok = true;
     $res = rand($min, $max);
@@ -64,10 +62,3 @@ $arrjson = array(
 $json = json_encode($arrjson,JSON_UNESCAPED_UNICODE);
 
 echo $json;
-
-$_SESSION['photorec'] = $photorec;
-}
-else {
-    $photorec=$_SESSION['photorec'];
-    $photo=$photorec['photo'];
-}
