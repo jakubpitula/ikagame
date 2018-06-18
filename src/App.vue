@@ -15,6 +15,7 @@ export default {
     return{
       bus:new Vue(),
       prog:0,
+      counter:0,
       ready_:false
     }
   },
@@ -25,11 +26,13 @@ export default {
   methods:{
     setData:function(obj){
       this.ready_ = true;
+      if(this.counter != obj.counter)
+        alert("oops counters dont match " + this.counter  + "/" + obj.counter);
       this.bus.$emit('update', obj);
     },
     getData:function(){
       let component = this;
-      fetch("http://aplikacjejs.fc.pl/test_data").then(function(res){
+      fetch("/api").then(function(res){
         return res.json();
       }, function(err){
         alert("oops " + err);
@@ -39,8 +42,9 @@ export default {
       //alert("sent");
     },
     process: function(obj){
+      this.counter++;
       this.getData();
-      this.prog+=3.125;
+      this.prog = (100/32)*counter;
     },
     initialize:function(){
       //alert("in");
