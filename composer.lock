@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "666332cf544aaabd3c877e872207f72e",
+    "content-hash": "5d8091c5b55c48c1f1a37ec5615d8a5a",
     "packages": [
         {
             "name": "csanquer/pdo-service-provider",

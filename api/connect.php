@@ -1,11 +1,12 @@
 <?php
 
-$connect = require_once 'host.php';
-
+//$connect = require_once 'host.php';
+$dbopts = parse_url(getenv('DATABASE_URL'));
 try{
+
     $db = new PDO(
-        "mysql:dbname={$connect['db']};host={$connect['host']};charset={$connect['charset']}", 
-        $connect['user'], $connect['password']
+        "mysql:dbname={$dbopts['db']};host={$dbopts['host']};charset={$dbopts['charset']}", 
+        $dbopts['user'], $dbopts['password']
     );
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 }
