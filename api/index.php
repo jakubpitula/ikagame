@@ -45,7 +45,7 @@ $photorec = $_SESSION['photos'][$res];
 $photo = $photorec['photo']; // link do zdjecia
 
 $corrects = $db->prepare(
-    "SELECT name, surname FROM classmates WHERE id=:id"
+    "SELECT pname, psurname FROM classmates WHERE id=:id"
 );
 $corrects->bindValue(':id', $res+1);
 $corrects->execute();
@@ -53,8 +53,8 @@ $corrects->execute();
 $namejson = $corrects->fetch(PDO::FETCH_ASSOC);
 
 $arrjson = array(
-    'imie' => $namejson['name'],
-    'nazwisko' => $namejson['surname'],
+    'imie' => $namejson['pname'],
+    'nazwisko' => $namejson['psurname'],
     'addr' => $photo,
     'counter' => $_SESSION['actual']
 );
