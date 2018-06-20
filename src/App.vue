@@ -56,10 +56,11 @@ export default {
     process: function(obj){
       this.counter++;
       this.getData();
-      this.prog = (100/32)*counter;
+      this.prog = (100/32)*this.counter;
     },
     initialize:function(){
       this.getData();
+      this.counter = 1;
     }
   },
   mounted:function(){
