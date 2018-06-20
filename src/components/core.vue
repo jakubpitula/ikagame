@@ -3,7 +3,7 @@
 		<div class="col-10 col-md-7 col-lg-5 align-self-center">
 			<div class="row justify-content-center align-items-center">
 				<div class="img-container col-7 align-self-center ">
-					<img id="img" :src="imagesrc" :class="{collapsed: imageCollapsed}" class="img" @onload="imgLoaded">
+					<img id="img" :src="imagesrc" :class="{collapsed: imageCollapsed}" class="img" @load="imageCollapsed = false">
 				</div>
 			</div>
 			<div class="row justify-content-center align-items-center">
@@ -64,7 +64,6 @@ export default {
 		},
 		updateImage: function() {
 			this.imageCollapsed = true;
-			let context = this;
 			console.log("getting image from " + "/img/" + this.person.addr);
 			fetch("/img/" + this.person.addr, { mode: "cors" })
 			.then(
@@ -84,6 +83,7 @@ export default {
 				blob => {
 					let imgaddr = window.URL.createObjectURL(blob);
 					this.imagesrc = imgaddr;
+					let context = this;
 					document.getElementById("img").onload = ()=>{context.imageCollapsed = false};
 				},
 				err => {
