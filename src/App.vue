@@ -4,11 +4,7 @@
 		<transition name="fade">
 		<core v-if="core_display" :bus="bus" :aliasesObj="aliasesObj" @submit="process" @loaded="getData"/>
 		<results v-if="results_display" :resultsObj="results" />
-		<div v-if="!ready_" class="spinner">
-			<div class="bounce1"></div>
-			<div class="bounce2"></div>
-			<div class="bounce3"></div>
-		</div>
+		<div v-if="!ready_" class="spinner"><div></div><div></div><div></div></div>
 		</transition>
 	</div>
 </template>
@@ -103,7 +99,6 @@ export default {
 		
 	}
 }
-
 </script>
 
 <style>
@@ -115,16 +110,6 @@ export default {
 	color: #2c3e50;
 	margin:0;
 	min-height:100vh;
-}
-.loader-icon {
-	display: block;
-	position: absolute;
-	top:50%;
-	left:50%;
-	transform:translate(-50%, -50%);
-	width: 100px;
-	height: 100px;
-
 }
 .spinner {
 	width: 70px;
@@ -147,12 +132,12 @@ export default {
 	animation: sk-bouncedelay 1.4s infinite ease-in-out both;
 }
 
-.spinner .bounce1 {
+.spinner > div:nth-child(1) {
 	-webkit-animation-delay: -0.32s;
 	animation-delay: -0.32s;
 }
 
-.spinner .bounce2 {
+.spinner > div:nth-child(2) {
 	-webkit-animation-delay: -0.16s;
 	animation-delay: -0.16s;
 }
@@ -175,7 +160,7 @@ export default {
 	transition: opacity .5s;
 	transition-delay:0.5s;
 }
-.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+.fade-enter, .fade-leave-to {
 	opacity: 0;
 }
 </style>
