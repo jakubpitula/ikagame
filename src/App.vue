@@ -42,7 +42,7 @@ export default {
 		},
 		setData:function(obj){
 			this.ready_ = true;
-			this.prog = (100/32)*obj.counter;
+			this.prog = (100/32)*(obj.counter - 1);
 			this.bus.$emit('update', obj);
 			console.log("counter value: " + obj.counter);
 			if(obj.counter > 32)
