@@ -60,7 +60,7 @@ export default {
 			});
 		},
 		process: function(obj){
-			if(counter > 32){
+			if(this.counter > 32){
 				this.displayResults();
 				return;
 			}
