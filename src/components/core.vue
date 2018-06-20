@@ -19,50 +19,22 @@
 <script>
 export default {
   name: "core",
-  props: ["bus"],
+  props: ["bus", "aliasesObj"],
   data() {
     return {
       context: this,
       person: { imie: "", nazwisko: "", addr: "" },
       imie: "",
       nazwisko: "",
-      imagesrc: "",
+	  imagesrc: "",
       imageCollapsed: true
     };
   },
   methods: {
     checkAlias: function(test, original) {
-      if (test === original) return true;
-      let aliasesObj;
-      fetch("/api/aliases.json", {method: "GET", credentials: "include"}).then(
-        function(res) {
-          if (res.ok) {
-            res.clone().json().then(
-                js => {
-                  aliasesObj = js;
-                },
-                err => {
-                  res.text().then(text => {
-                    console.warn("(aliases) Error with the JSON: " + err + "\n\nResponse from server:\n" + text);
-                  });
-                }
-              );
-          } else {
-            res.text().then(text => {
-              console.warn("(aliases) Error getting data. Response code was not ok :c\n\nResponse from server:\n" + text);
-            });
-          }
-        },
-        function(err) {
-          console.warn("(aliases) Fetch failed: " + err);
-        }
-      );
-      if (aliasesObj != undefined) {
-        for (obj in aliasesObj) {
-          if (obj.alias == test && obj.index == original) return true;
-        }
-      }
-      return false;
+	  	if (test == original) return true;
+	  	for (obj in this.aliasesObj) if (obj.alias == test && obj.index == original) return true;
+      	return false;
     },
     submit: function() {
       let check = false;

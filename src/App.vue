@@ -2,7 +2,7 @@
 	<div id="app" class="app-container container-fluid">
 		<progress_ :value ="prog"/>
 		<transition name="fade">
-		<core v-if="core_display" :bus="bus" @submit="process" @loaded="getData"/>
+		<core v-if="core_display" :bus="bus" :aliasesObj="aliasesObj" @submit="process" @loaded="getData"/>
 		<results v-if="results_display" :resultsObj="results" />
 		<div v-if="!ready_" class="spinner">
 			<div class="bounce1"></div>
@@ -25,6 +25,7 @@ export default {
 			bus:new Vue(),
 			prog:0,
 			results:[],
+			aliasesObj: [],
 			results_display:false,
 			ready_:false
 		}
@@ -67,7 +68,6 @@ export default {
 		process: function(obj){
 			this.results.push(obj);
 			this.getData();
-			
 		}
 	},
 	computed:{
@@ -76,7 +76,32 @@ export default {
 		}
 	},
 	mounted:function(){
-		this.getData();
+		let context = this;
+		fetch("/api/aliases.json", {method: "GET", credentials: "include"}).then(
+        function(res) {
+          if (res.ok) {
+            res.clone().json().then(
+                js => {
+				  context.aliasesObj = js;
+				  context.ready_ = true;
+                },
+                err => {
+                  res.text().then(text => {
+                    console.warn("(aliases) Error with the JSON: " + err + "\n\nResponse from server:\n" + text);
+                  });
+                }
+              );
+          } else {
+            res.text().then(text => {
+              console.warn("(aliases) Error getting data. Response code was not ok :c\n\nResponse from server:\n" + text);
+            });
+          }
+        },
+        function(err) {
+          console.warn("(aliases) Fetch failed: " + err);
+        }
+      );
+		
 	}
 }
 
@@ -90,7 +115,7 @@ export default {
 	text-align: center;
 	color: #2c3e50;
 	margin:0;
-	height:100vh;
+	min-height:100vh;
 }
 .loader-icon {
 	display: block;
