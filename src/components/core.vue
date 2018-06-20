@@ -3,7 +3,7 @@
 		<div class="col-10 col-md-7 col-lg-5 align-self-center">
 			<div class="row justify-content-center align-items-center">
 				<div class="img-container col-7 align-self-center ">
-					<img id="img" :src="imagesrc" :class="{collapsed: imageCollapsed}" class="img" @load="window.setTimeout(()=>{imageCollapsed = false}, 300)">
+					<img id="img" :src="imagesrc" :class="{collapsed: imageCollapsed}" class="img" @load="displayImage">
 				</div>
 			</div>
 			<div class="row justify-content-center align-items-center">
@@ -31,6 +31,9 @@ export default {
 		};
   },
   methods: {
+		displayImage: function(){
+			window.setTimeout(()=>{this.imageCollapsed = false}, 300);
+		},
 		format: function(string) {
 			string = string.trim().toLowerCase();
 			return string.charAt(0).toUpperCase() + string.slice(1);
