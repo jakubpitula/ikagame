@@ -39,7 +39,7 @@ export default {
     },
     getData:function(){
       let component = this;
-      fetch("/api/").then(function(res){
+      fetch("/api/", {method: 'GET', credentials: 'include'}).then(function(res){
         if(res.ok){
           res.clone().json().then(js=>{component.setData(js)}, err=>{
             res.text().then(text => {throw new Error("Error with the JSON: " + err + "\n\nResponse from server:\n" + text)});
@@ -59,8 +59,8 @@ export default {
       this.prog = (100/32)*this.counter;
     },
     initialize:function(){
-      this.getData();
       this.counter = 1;
+      this.getData();
     }
   },
   mounted:function(){
