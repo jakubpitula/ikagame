@@ -9,7 +9,7 @@ $prephotos->execute();
 
 if(!isset($_SESSION['photos'])) $_SESSION['photos'] = $prephotos->fetchAll(PDO::FETCH_ASSOC);
 
-$max = $prephotos->rowCount() - 1;
+$max = $prephotos->rowCount();
 $min = 0;
 
 if(!isset($_SESSION['actual'])) $_SESSION['actual'] = 0;
