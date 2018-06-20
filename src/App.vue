@@ -1,15 +1,15 @@
 <template>
 	<div id="app" class="app-container container-fluid">
-		<progress_ ref="coreInstance" :value ="prog"/>
+		<progress_ :value ="prog"/>
 		<transition name="fade">
-		<core v-if="ready_" :bus="bus" @submit="process" @loaded="initialize"/>
+		<core v-if="core_display" :bus="bus" @submit="process" @loaded="initialize"/>
+		<results v-if="results_display" :resultsObj="results" />
 		<div v-if="!ready_" class="spinner">
 			<div class="bounce1"></div>
 			<div class="bounce2"></div>
 			<div class="bounce3"></div>
 		</div>
 		</transition>
-		
 	</div>
 </template>
 
@@ -17,6 +17,7 @@
 import Vue from 'vue'
 import core from './components/core'
 import progress_ from './components/progress'
+import results from './components/results'
 export default {
 	name: 'App',
 	data(){
@@ -31,11 +32,13 @@ export default {
 	},
 	components: {
 		core,
-		progress_
+		progress_,
+		results
 	},
 	methods:{
 		displayResults:function(){
-			
+			this.results_display = true;
+			document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
 		},
 		setData:function(obj){
 			this.ready_ = true;

@@ -31,7 +31,7 @@
 </template>
 <script>
 export default {
-  name: "core",
+  name: "results",
   props: ["resultsObj"],
   computed: {
     points: function() {
@@ -39,9 +39,6 @@ export default {
       for (res in this.resultsObj) if (res.correct) counter++;
       return (100 / 32 * counter).toFixed(1) + " %";
     }
-  },
-  mounted: function() {
-    document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
   }
 };
 </script>
