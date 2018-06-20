@@ -86,7 +86,7 @@ export default {
   max-width: 350px;
 }
 .main-form-container {
-  height: calc(100% - 60px);
+  height: calc(100vh - 60px);
 }
 .img {
   border-radius: 50%;

@@ -52,7 +52,7 @@ export default {
   padding-bottom:30px;
 }
 .main-form-container {
-  height: auto;
+  min-height: calc(100vh - 60px);
 }
 .form {
   margin-top: 50px;
