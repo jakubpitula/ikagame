@@ -46,6 +46,8 @@ export default {
 			let check = false;
 			this.imie = this.format(this.imie);
 			this.nazwisko = this.format(this.nazwisko);
+			this.person.imie = this.format(this.person.imie);
+			this.person.nazwisko = this.format(this.person.nazwisko);
 			if(this.checkAlias(this.imie, this.person.imie) && this.nazwisko == this.person.nazwisko)
 				check = true;
 			console.log(this.imie + "/" + this.person.imie + " => " + this.checkAlias(this.imie, this.person.imie) + " | " + this.nazwisko + "/" + this.person.nazwisko + " }=> " + check);
