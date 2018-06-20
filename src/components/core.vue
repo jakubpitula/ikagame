@@ -66,7 +66,7 @@ export default {
     },
     submit: function() {
       let check = false;
-      if (checkAlias(this.imie, this.person.imie) && this.nazwisko == this.person.nazwisko)
+      if (this.checkAlias(this.imie, this.person.imie) && this.nazwisko == this.person.nazwisko)
         check = true;
       this.$emit("submit", {
         correct: check,
