@@ -38,11 +38,15 @@ export default {
 		checkAlias: function(test, original) {
 			if (test == original) return true;
 			console.log("test_alias: " + test + "/" + original);
+			let ret = false;
 			this.aliasesObj.forEach(obj => {
 				console.log(this.format(obj.alias) + "//" + test + "/" + this.format(obj.index) + "//" +  original + " }=> " + (this.format(obj.alias) == test && this.format(obj.index) == original));
-				if (this.format(obj.alias) == test && this.format(obj.index) == original)	return true;
+				if (this.format(obj.alias) == test && this.format(obj.index) == original)	{
+					ret = true;
+					return;
+				}
 			});
-			return false;
+			return ret;
 		},
 		submit: function() {
 			let check = false;
