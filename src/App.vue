@@ -2,7 +2,7 @@
 	<div id="app" class="app-container container-fluid">
 		<progress_ :value ="prog"/>
 		<transition name="fade">
-		<core v-if="core_display" :bus="bus" @submit="process" @loaded="initialize"/>
+		<core v-if="core_display" :bus="bus" @submit="process" @loaded="getData"/>
 		<results v-if="results_display" :resultsObj="results" />
 		<div v-if="!ready_" class="spinner">
 			<div class="bounce1"></div>
@@ -24,7 +24,6 @@ export default {
 		return{
 			bus:new Vue(),
 			prog:0,
-			counter:0,
 			results:[],
 			results_display:false,
 			ready_:false
@@ -42,15 +41,20 @@ export default {
 		},
 		setData:function(obj){
 			this.ready_ = true;
-			this.counter = obj.counter;
+			this.prog = (100/32)*obj.counter;
 			this.bus.$emit('update', obj);
+			if(obj.counter >= 32)
+				this.displayResults();
 		},
 		getData:function(){
 			let component = this;
 			fetch("/api/", {method: 'GET', credentials: 'include'}).then(function(res){
 				if(res.ok){
-					res.clone().json().then(js=>{component.setData(js)}, err=>{
-						res.text().then(text => {throw new Error("Error with the JSON: " + err + "\n\nResponse from server:\n" + text)});
+					res.clone().json().then(
+						js=>{component.setData(js)}, 
+						err=>{
+						res.text().then(text => {throw new Error("Error with the JSON: " + err + "\n\nResponse from server:\n" + text);
+						});
 					});
 				} else {
 					res.text().then(text => {throw new Error("Error getting data. Response code was not ok :c\n\nResponse from server:\n" + text)});
@@ -62,12 +66,7 @@ export default {
 		process: function(obj){
 			this.results.push(obj);
 			this.getData();
-			this.prog = (100/32)*(this.counter - 1);
-			if(this.counter > 32)
-				this.displayResults();
-		},
-		initialize:function(){
-			this.getData();
+			
 		}
 	},
 	computed:{
