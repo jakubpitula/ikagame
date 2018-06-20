@@ -57,6 +57,7 @@ export default {
 		},
 		updateImage: function() {
 			this.imageCollapsed = true;
+			console.log("getting image from " + "/img/" + this.person.addr);
 			fetch("/img/" + this.person.addr, { mode: "cors" })
 			.then(
 				response => response.blob(),
