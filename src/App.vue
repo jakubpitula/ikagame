@@ -60,13 +60,11 @@ export default {
 			});
 		},
 		process: function(obj){
-			if(this.counter > 32){
-				this.displayResults();
-				return;
-			}
 			this.results.push(obj);
 			this.getData();
 			this.prog = (100/32)*this.counter;
+			if(this.counter >= 32)
+				this.displayResults();
 		},
 		initialize:function(){
 			this.getData();
