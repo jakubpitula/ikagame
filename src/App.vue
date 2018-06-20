@@ -43,6 +43,7 @@ export default {
 			this.ready_ = true;
 			this.prog = (100/32)*obj.counter;
 			this.bus.$emit('update', obj);
+			console.log("counter value: " + obj.counter);
 			if(obj.counter >= 32)
 				this.displayResults();
 		},
