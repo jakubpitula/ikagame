@@ -48,9 +48,9 @@ export default {
   max-width: 350px;
 }
 .points h1 {
-  font-weight: 300;
-  font-size: 3rem;
-  font-family: Raleway;
+  font-weight: 100;
+  font-size: 4rem;
+  font-family: Roboto;
   padding-top: 50px;
   padding-bottom: 30px;
 }

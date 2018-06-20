@@ -32,7 +32,7 @@ export default {
   },
   methods: {
 		displayImage: function(){
-			window.setTimeout(()=>{this.imageCollapsed = false}, 300);
+			window.setTimeout(()=>{this.imageCollapsed = false}, 200);
 		},
 		format: function(string) {
 			string = string.trim().toLowerCase();
