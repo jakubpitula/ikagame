@@ -72,7 +72,7 @@ export default {
 						return response.blob();
 					else{
 						console.warn("Couldn't load image");
-						return null;
+						throw "image not loaded";
 					}
 				},
 				err => {
