@@ -33,7 +33,8 @@ export default {
   props: ["resultsObj"],
   computed: {
     points: function() {
-      let counter = 0;
+	  let counter = 0;
+	  this.resultsObj;
       for (let res in this.resultsObj) if (res.correct) counter++;
       return (100 / 32 * counter).toFixed(1) + " %";
     }
