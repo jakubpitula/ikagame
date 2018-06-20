@@ -24,7 +24,7 @@ if($_SESSION['actual']>$max){
         'imie' => "",
         'nazwisko' => "",
         'addr' => "",
-        'counter' => $_SESSION['actual']
+        'counter' => 33
     );
     $json = json_encode($arrjson,JSON_UNESCAPED_UNICODE);
     unset($_SESSION['actual']);
