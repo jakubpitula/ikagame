@@ -11,14 +11,14 @@
 					<table class="table">
 						<thead>
     						<tr>
-      							<th scope="col">Imie</th>
-      							<th scope="col">Nazwisko</th>
+      							<th scope="col">Odpowiedź</th>
+      							<th scope="col">Poprawne</th>
    	 						</tr>
   						</thead>
 						<tbody>
 							<tr :class="{'table-danger': !obj.correct}" :key="obj" v-for="obj in resultsObj">
-								<td>{{obj.imie}}</td>
-								<td>{{obj.nazwisko}}</td>
+								<td>{{obj.imie}} {{obj.nazwisko}}</td>
+								<td>{{obj.imie_poprawne}} {{obj.nazwisko_poprawne}}</td>
 							</tr>
 						</tbody>
 					</table>

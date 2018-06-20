@@ -71,7 +71,9 @@ export default {
       this.$emit("submit", {
         correct: check,
         imie: this.imie,
-        nazwisko: this.nazwisko
+		nazwisko: this.nazwisko,
+		imie_poprawne: this.person.imie,
+		nazwisko_poprawne: this.person.nazwisko
 	  });
 	  
     },
