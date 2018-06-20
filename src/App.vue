@@ -62,8 +62,8 @@ export default {
 		process: function(obj){
 			this.results.push(obj);
 			this.getData();
-			this.prog = (100/32)*this.counter;
-			if(this.counter >= 32)
+			this.prog = (100/32)*(this.counter - 1);
+			if(this.counter > 32)
 				this.displayResults();
 		},
 		initialize:function(){
