@@ -20,8 +20,17 @@ if(!isset($_SESSION['randomized'])) $_SESSION['randomized']=array();
 $tab=$_SESSION['randomized'];
 
 if($_SESSION['actual']>$max){
+    $arrjson = array(
+        'imie' => "",
+        'nazwisko' => "",
+        'addr' => "",
+        'counter' => $_SESSION['actual']
+    );
+    $json = json_encode($arrjson,JSON_UNESCAPED_UNICODE);
     unset($_SESSION['actual']);
     unset($_SESSION['randomized']);
+    echo $json;
+    exit(0);
 }
 
 do{
