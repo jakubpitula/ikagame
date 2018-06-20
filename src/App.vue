@@ -2,7 +2,7 @@
   <div id="app" class="app-container container-fluid">
     <progress_ ref="coreInstance" :value ="prog"/>
     <transition name="fade">
-    <core v-if="ready_" :bus="bus" @btnclicked="process" @loaded="initialize"/>
+    <core v-if="ready_" :bus="bus" @submit="process" @loaded="initialize"/>
     <div v-if="!ready_" class="spinner">
       <div class="bounce1"></div>
       <div class="bounce2"></div>
@@ -23,6 +23,7 @@ export default {
       bus:new Vue(),
       prog:0,
       counter:0,
+      results:[],
       ready_:false
     }
   },
@@ -49,11 +50,10 @@ export default {
         }
       }, function(err){
         throw new Error("Fetch failed: " + err);
-      }).then(function(js){
-        
       });
     },
     process: function(obj){
+      this.results.push(obj);
       this.counter++;
       this.getData();
       this.prog = (100/32)*this.counter;
