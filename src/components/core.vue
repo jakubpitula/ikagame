@@ -76,7 +76,7 @@ export default {
 					}
 				},
 				err => {
-					console.warn("Image fetch failed: " + err);
+					throw new Error("Image fetch failed: " + err);
 				}
 			)
 			.then(
@@ -88,7 +88,7 @@ export default {
 					this.imageCollapsed = false;
 				},
 				err => {
-					console.warn("There was a problem with the BLOB resource: " + err);
+					throw new Error("There was a problem with the BLOB resource: " + err);
 				}
 			);
 		}
