@@ -70,9 +70,10 @@ export default {
         check = true;
       this.$emit("submit", {
         correct: check,
-        imie: this.person.imie,
-        nazwisko: this.person.nazwisko
-      });
+        imie: this.imie,
+        nazwisko: this.nazwisko
+	  });
+	  
     },
     updateImage: function() {
       this.imageCollapsed = true;
@@ -86,7 +87,9 @@ export default {
         .then(
           blob => {
             let imgaddr = window.URL.createObjectURL(blob);
-            this.imagesrc = imgaddr;
+			this.imagesrc = imgaddr;
+			this.imie = "";
+			this.nazwisko = "";
             this.imageCollapsed = false;
           },
           err => {
