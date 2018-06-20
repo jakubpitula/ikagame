@@ -36,7 +36,7 @@ export default {
   computed: {
     points: function() {
       let counter = 0;
-      for (res in this.resultsObj) if (res.correct) counter++;
+      for (let res in this.resultsObj) if (res.correct) counter++;
       return (100 / 32 * counter).toFixed(1) + " %";
     }
   }
