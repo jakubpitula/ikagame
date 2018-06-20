@@ -104,7 +104,7 @@ export default {
   }
 };
 </script>
-<style>
+<style scoped>
 .img-container {
   max-width: 350px;
 }
