@@ -33,7 +33,7 @@ export default {
   methods: {
     checkAlias: function(test, original) {
 	  	if (test == original) return true;
-	  	for (obj in this.aliasesObj) if (obj.alias == test && obj.index == original) return true;
+	  	for (let obj in this.aliasesObj) if (obj.alias == test && obj.index == original) return true;
       	return false;
     },
     submit: function() {
