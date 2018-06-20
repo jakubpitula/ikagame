@@ -3,7 +3,7 @@
 		<div class="col-10 col-md-7 col-lg-5 align-self-center">
 			<div class="row justify-content-center align-items-center">
 				<div class="img-container col-7 align-self-center ">
-					<img id="img" :src="imagesrc" :class="{collapsed: imageCollapsed}" class="img" @load="imageCollapsed = false">
+					<img id="img" :src="imagesrc" :class="{collapsed: imageCollapsed}" class="img" @load="setTimeout(()=>{imageCollapsed = false}, 200)">
 				</div>
 			</div>
 			<div class="row justify-content-center align-items-center">
