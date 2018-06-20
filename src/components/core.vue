@@ -31,9 +31,6 @@ export default {
 		};
   },
   methods: {
-		imgLoaded: function(){
-			this.imageCollapsed = false;
-		},
 		format: function(string) {
 			string = string.trim().toLowerCase();
 			return string.charAt(0).toUpperCase() + string.slice(1);
@@ -67,6 +64,7 @@ export default {
 		},
 		updateImage: function() {
 			this.imageCollapsed = true;
+			let context = this;
 			console.log("getting image from " + "/img/" + this.person.addr);
 			fetch("/img/" + this.person.addr, { mode: "cors" })
 			.then(
@@ -86,6 +84,7 @@ export default {
 				blob => {
 					let imgaddr = window.URL.createObjectURL(blob);
 					this.imagesrc = imgaddr;
+					document.getElementById("img").onload = ()=>{context.imageCollapsed = false};
 				},
 				err => {
 					throw new Error("There was a problem with the BLOB resource: " + err);
