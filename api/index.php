@@ -9,7 +9,7 @@ $prephotos->execute();
 
 if(!isset($_SESSION['photos'])) $_SESSION['photos'] = $prephotos->fetchAll(PDO::FETCH_ASSOC);
 
-$max = $prephotos->rowCount();
+$max = $prephotos->rowCount() - 1;
 $min = 0;
 
 if(!isset($_SESSION['actual'])) $_SESSION['actual'] = 0;
@@ -22,17 +22,7 @@ $tab=$_SESSION['randomized'];
 if($_SESSION['actual']>$max){
     unset($_SESSION['actual']);
     unset($_SESSION['randomized']);
-    $arrjson = array(
-        'imie' => "",
-        'nazwisko' => "",
-        'addr' => "",
-        'counter' => 33
-    );
-    
-    $json = json_encode($arrjson,JSON_UNESCAPED_UNICODE);
-    
-    echo $json;
-} else {
+}
 
 do{
     $ok = true;
@@ -72,4 +62,3 @@ $arrjson = array(
 $json = json_encode($arrjson,JSON_UNESCAPED_UNICODE);
 
 echo $json;
-}
