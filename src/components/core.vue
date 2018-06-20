@@ -3,7 +3,7 @@
 		<div class="col-10 col-md-7 col-lg-5 align-self-center">
 			<div class="row justify-content-center align-items-center">
 				<div class="img-container col-7 align-self-center ">
-					<img :src="imagesrc" :class="{collapsed: imageCollapsed}" class="img">
+					<img id="img" :src="imagesrc" :class="{collapsed: imageCollapsed}" class="img" @onload="imgLoaded">
 				</div>
 			</div>
 			<div class="row justify-content-center align-items-center">
@@ -29,8 +29,11 @@ export default {
 			imagesrc: "",
 			imageCollapsed: true
 		};
-  	},
-  	methods: {
+  },
+  methods: {
+		imgLoaded: function(){
+			this.imageCollapsed = false;
+		},
 		format: function(string) {
 			string = string.trim().toLowerCase();
 			return string.charAt(0).toUpperCase() + string.slice(1);
@@ -76,8 +79,6 @@ export default {
 					}
 				},
 				err => {
-					this.imie = "";
-					this.nazwisko = "";
 					throw new Error("Image fetch failed: " + err);
 				}
 			)
@@ -85,16 +86,13 @@ export default {
 				blob => {
 					let imgaddr = window.URL.createObjectURL(blob);
 					this.imagesrc = imgaddr;
-					this.imie = "";
-					this.nazwisko = "";
-					this.imageCollapsed = false;
 				},
 				err => {
-					this.imie = "";
-					this.nazwisko = "";
 					throw new Error("There was a problem with the BLOB resource: " + err);
 				}
 			);
+			this.imie = "";
+			this.nazwisko = "";
 		}
  	},
 	mounted: function() {
