@@ -83,8 +83,6 @@ export default {
 				blob => {
 					let imgaddr = window.URL.createObjectURL(blob);
 					this.imagesrc = imgaddr;
-					let context = this;
-					document.getElementById("img").onload = ()=>{context.imageCollapsed = false};
 				},
 				err => {
 					throw new Error("There was a problem with the BLOB resource: " + err);
