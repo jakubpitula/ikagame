@@ -72,10 +72,12 @@ export default {
 						return response.blob();
 					else{
 						console.warn("Couldn't load image");
-						throw "image not loaded";
+						throw "Image not found";
 					}
 				},
 				err => {
+					this.imie = "";
+					this.nazwisko = "";
 					throw new Error("Image fetch failed: " + err);
 				}
 			)
@@ -88,6 +90,8 @@ export default {
 					this.imageCollapsed = false;
 				},
 				err => {
+					this.imie = "";
+					this.nazwisko = "";
 					throw new Error("There was a problem with the BLOB resource: " + err);
 				}
 			);
