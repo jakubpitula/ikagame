@@ -37,11 +37,11 @@ export default {
 		},
 		checkAlias: function(test, original) {
 			if (test == original) return true;
-			console.log("t " + test + "/" + original);
-			for (let obj in this.aliasesObj){
+			console.log("test_alias: " + test + "/" + original);
+			this.aliasesObj.forEach(obj => {
 				console.log(this.format(obj.alias) + "//" + test + "/" + this.format(obj.index) + "//" +  original + " }=> " + (this.format(obj.alias) == test && this.format(obj.index) == original));
 				if (this.format(obj.alias) == test && this.format(obj.index) == original)	return true;
-			}
+			});
 			return false;
 		},
 		submit: function() {
