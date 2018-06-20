@@ -1,3 +1,0 @@
-RewriteEngine On
-RewriteCond %{REQUEST_FILENAME}.jpg -f
-RewriteRule ^(.+)\.png$ /$1.jpg [R=301,L,NC]
