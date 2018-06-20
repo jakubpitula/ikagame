@@ -37,10 +37,8 @@ export default {
 		},
 		checkAlias: function(test, original) {
 			if (test == original) return true;
-			console.log("test_alias: " + test + "/" + original);
 			let ret = false;
 			this.aliasesObj.forEach(obj => {
-				console.log(this.format(obj.alias) + "//" + test + "/" + this.format(obj.index) + "//" +  original + " }=> " + (this.format(obj.alias) == test && this.format(obj.index) == original));
 				if (this.format(obj.alias) == test && this.format(obj.index) == original)	{
 					ret = true;
 					return;
@@ -56,7 +54,6 @@ export default {
 			this.person.nazwisko = this.format(this.person.nazwisko);
 			if(this.checkAlias(this.imie, this.person.imie) && this.nazwisko == this.person.nazwisko)
 				check = true;
-			console.log(this.imie + "/" + this.person.imie + " => " + this.checkAlias(this.imie, this.person.imie) + " | " + this.nazwisko + "/" + this.person.nazwisko + " }=> " + check);
 			this.$emit("submit", {
 				correct: check,
 				imie: this.imie,
@@ -70,7 +67,14 @@ export default {
 			console.log("getting image from " + "/img/" + this.person.addr);
 			fetch("/img/" + this.person.addr, { mode: "cors" })
 			.then(
-				response => response.blob(),
+				response => {
+					if(response.ok)
+						return response.blob();
+					else{
+						console.warn("Couldn't load image");
+						return null;
+					}
+				},
 				err => {
 					throw new Error("Image fetch failed: " + err);
 				}
