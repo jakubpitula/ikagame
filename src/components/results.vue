@@ -32,11 +32,13 @@ export default {
   name: "results",
   props: ["resultsObj"],
   computed: {
-    points: function() {
-	  let counter = 0;
-	  this.resultsObj;
-      for (let res in this.resultsObj) if (res.correct) counter++;
-      return (100 / 32 * counter).toFixed(1) + " %";
+    points: {
+      cache: false,
+      get() {
+        let counter = 0;
+        this.resultsObj.forEach(res => {if (res.correct) counter++});
+        return (100 / 32 * counter).toFixed(1) + " %";
+      }
     }
   }
 };
@@ -49,14 +51,14 @@ export default {
   font-weight: 300;
   font-size: 3rem;
   font-family: Raleway;
-  padding-top:50px;
-  padding-bottom:30px;
+  padding-top: 50px;
+  padding-bottom: 30px;
 }
 .main-form-container {
   min-height: calc(100vh - 60px);
 }
 .form {
   margin-top: 50px;
-  margin-bottom:10%;
+  margin-bottom: 10%;
 }
 </style>
