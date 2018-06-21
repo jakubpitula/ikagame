@@ -2,7 +2,7 @@
 	<div class="row main-form-container justify-content-center align-items-center">
 		<div class="col-10 col-md-7 col-lg-5 align-self-center">
 			<div class="row justify-content-center align-items-center">
-				<div class="img-container col-7 align-self-center ">
+				<div id="imgContainer" class="img-container col-7 align-self-center ">
 					<transition name="imganim" mode="out-in">
 					<img id="img" :key="imagesrc" :src="imagesrc" class="img">
 					</transition>
@@ -97,6 +97,10 @@ export default {
 			this.person = obj;
 			this.updateImage();
 		});
+		window.addEventListener("resize", ()=>{
+			document.getElementById("imgContainer").style.height = getComputedStyle(document.getElementById("imgContainer")).width;
+		});
+		document.getElementById("imgContainer").style.height = getComputedStyle(document.getElementById("imgContainer")).width;
 		this.$emit("loaded");
   	}
 };
