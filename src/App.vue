@@ -67,16 +67,16 @@ export default {
 		initialize:function(){
 			console.log(localStorage);
 			if(localStorage.getItem("last-person") && localStorage.getItem("results")){
-				this.results = localStorage.getItem("results");
-				this.setData(localStorage.getItem("last-person"));
+				this.results = JSON.parse(localStorage.getItem("results"));
+				this.setData(JSON.parse(localStorage.getItem("last-person")));
 			} else {
 				this.getData();
 			}
 			localStorage.clear();
 		},
 		saveData:function(){
-		 	if(!this.results_display && this.results.length > 0)
-				localStorage.setItem("results", this.results);
+		 	if(this.results.length > 0)
+				localStorage.setItem("results", JSON.stringify(this.results));
 	 	}
 	},
 	computed:{

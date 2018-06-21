@@ -95,7 +95,7 @@ export default {
 		saveData:function(){
 		 console.log(this.person.counter);
 			if(this.person.counter <= 32)
-				localStorage.setItem("last-person", this.person);
+				localStorage.setItem("last-person", JSON.stringify(this.person));
 	 }
 	},
 	mounted: function() {
