@@ -107,7 +107,9 @@ export default {
 </script>
 <style scoped>
 .img-container {
-  max-width: 350px;
+  max-width: 320px;
+	padding:0;
+	max-height: 40vh;
 }
 .main-form-container {
   height: calc(100vh - 60px);
