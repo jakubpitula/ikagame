@@ -3,7 +3,9 @@
 		<div class="col-10 col-md-7 col-lg-5 align-self-center">
 			<div class="row justify-content-center align-items-center">
 				<div class="img-container col-7 align-self-center ">
-					<img id="img" :src="imagesrc" :class="{collapsed: imageCollapsed}" class="img" @load="displayImage">
+					<transition name="imganim">
+						<img id="img" :src="imagesrc" v-show="!imageCollapsed" class="img" @load="displayImage">
+					</transition>
 				</div>
 			</div>
 			<div class="row justify-content-center align-items-center">
@@ -129,5 +131,12 @@ export default {
 .form {
   margin-top: 50px;
   margin-bottom: 20%;
+}
+.imganim-enter-active, .imganim-leave-active {
+	transition: all 250ms;
+}
+.imganim-enter, .imganim-leave-to {
+	opacity: 0;
+	transform: scale(0);
 }
 </style>
