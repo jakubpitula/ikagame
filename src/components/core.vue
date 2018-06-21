@@ -91,8 +91,13 @@ export default {
 			this.imie = "";
 			this.nazwisko = "";
 			document.getElementById("imie").focus();
-		}
- 	},
+		},
+		saveData:function(){
+		 console.log(this.person.counter);
+			if(this.person.counter <= 32)
+				localStorage.setItem("last-person", this.person);
+	 }
+	},
 	mounted: function() {
 		this.bus.$on("update", obj => {
 			this.person = obj;
@@ -102,11 +107,7 @@ export default {
 			document.getElementById("imgContainer").style.height = getComputedStyle(document.getElementById("imgContainer")).width;
 		});
 		let context = this;
-		window.addEventListener("beforeunload", ()=>{
-			console.log(context.person.counter);
-			if(context.person.counter <= 32)
-				localStorage.setItem("last-person", context.person);
-		});
+		window.addEventListener("beforeunload", this.saveData);
 		document.getElementById("imgContainer").style.height = getComputedStyle(document.getElementById("imgContainer")).width;
 		this.$emit("loaded");
   	}

@@ -73,7 +73,11 @@ export default {
 				this.getData();
 			}
 			localStorage.clear();
-		}
+		},
+		saveData:function(){
+		 	if(!this.results_display && this.results.length > 0)
+				localStorage.setItem("results", this.results);
+	 	}
 	},
 	computed:{
 		core_display:function(){
@@ -82,11 +86,7 @@ export default {
 	},
 	mounted:function(){
 		let context = this;
-		window.addEventListener("beforeunload", ()=>{
-			console.log(context.results_display);
-			if(!context.results_display)
-				localStorage.setItem("results", context.results);
-		});
+		window.addEventListener("beforeunload", this.saveData);
 		fetch("/api/aliases.json", {method: "GET", credentials: "include"}).then(
         function(res) {
           if (res.ok) {
