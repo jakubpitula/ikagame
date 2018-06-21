@@ -6,7 +6,7 @@
 					<h1 v-text="points" :class="pointsTextStyle"></h1>
 					<div class="d-flex">
 						<button class="btn btn-primary mr-1" @click="reload"><i class="material-icons">refresh</i></button>
-						<button class="btn dropdown-toggle" :class="{'btn-outline-primary':!resultsExpanded, 'btn-primary':resultsExpanded}" @click="expand"></button>
+						<button class="btn dropdown-toggle" :class="{'btn-outline-primary':!resultsExpanded, 'btn-primary':resultsExpanded}" @click="expand">Szczegóły </button>
 					</div>
 				</div>
 			</div>
@@ -71,11 +71,17 @@ export default {
 .points {
   max-width: 350px;
 }
+.btn{
+	box-shadow:none !important;
+}
 .btn:first-child{
 	display: flex;
 	align-items: center;
 	padding:5px 10px;
-	width:50px;
+	width:auto;
+}
+.btn:last-child{
+	width:100%;
 }
 .points h1 {
   font-weight: 100;
