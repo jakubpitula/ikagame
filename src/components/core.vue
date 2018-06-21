@@ -1,18 +1,18 @@
 <template>
 	<div class="row main-form-container justify-content-center align-items-center">
-		<div class="col-10 col-md-7 col-lg-5 align-self-center">
+		<div class="col-11 col-sm-9 col-md-7 col-lg-5 align-self-center">
 			<div class="row justify-content-center align-items-center">
-				<div id="imgContainer" class="img-container col-7 align-self-center ">
+				<div id="imgContainer" class="img-container col-9 col-sm-7 align-self-center ">
 					<transition name="imganim" mode="out-in">
 					<img id="img" :key="imagesrc" :src="imagesrc" class="img">
 					</transition>
 				</div>
 			</div>
 			<div class="row justify-content-center align-items-center">
-				<div class="form col-10 align-self-center">
+				<div class="form col-12 col-md-10 align-self-center" @keyup.enter="submit">
 					<input v-model="imie" placeholder="Imię" id="imie" class="form-control" type="text">
 					<input v-model="nazwisko" placeholder="Nazwisko" id="nazwisko" class="form-control" type="text">
-					<button @click="submit" class="btn btn-primary btn-block">Next</button>
+					<button @click="submit" class="btn btn-primary btn-block">Następne</button>
 				</div>
 			</div>
 		</div>
@@ -148,5 +148,4 @@ export default {
   opacity: 0;
 	transform: scale(0.2);
 }
-
 </style>
