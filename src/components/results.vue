@@ -16,8 +16,8 @@
    	 						</tr>
   						</thead>
 						<tbody>
-							<tr :class="{'table-danger': !obj.correct}" :key="obj" v-for="obj in resultsObj">
-								<td>{{obj.imie}} {{obj.nazwisko}}</td>
+							<tr :key="obj" v-for="obj in resultsObj">
+								<td :class="{'green': obj.correct, 'red':!obj.correct}">{{obj.imie}} {{obj.nazwisko}}</td>
 								<td>{{obj.imie_poprawne}} {{obj.nazwisko_poprawne}}</td>
 							</tr>
 						</tbody>
@@ -60,5 +60,11 @@ export default {
 .form {
   margin-top: 50px;
   margin-bottom: 10%;
+}
+.green{
+	color:#43A047;
+}
+.red {
+	color:#E64A19;
 }
 </style>
