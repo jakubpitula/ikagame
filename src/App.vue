@@ -43,9 +43,9 @@ export default {
 			if(obj.counter > 32)
 				this.displayResults();
 		},
-		getData:function(){
+		getData:function(button = true){
 			let component = this;
-			fetch("/api/", {method: 'GET', credentials: 'include'}).then(function(res){
+			fetch("/api/", {method: 'POST', credentials: 'include', body: JSON.stringify({'buttonPressed':button})}).then(function(res){
 				if(res.ok){
 					res.clone().json().then(
 						js=>{component.setData(js)}, 
@@ -65,12 +65,11 @@ export default {
 			this.getData();
 		},
 		initialize:function(){
-			console.log(localStorage);
 			if(localStorage.getItem("last-person") && localStorage.getItem("results")){
 				this.results = JSON.parse(localStorage.getItem("results"));
 				this.setData(JSON.parse(localStorage.getItem("last-person")));
 			} else {
-				this.getData();
+				this.getData(false);
 			}
 			localStorage.clear();
 		},
