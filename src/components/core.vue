@@ -2,7 +2,7 @@
 	<div class="row main-form-container justify-content-center align-items-center">
 		<div class="col-11 col-sm-9 col-md-7 col-lg-5 align-self-center">
 			<div class="row justify-content-center align-items-center">
-				<div id="imgContainer" class="img-container col-9 col-sm-7 align-self-center ">
+				<div id="imgContainer" class="img-container col-7 align-self-center ">
 					<transition name="imganim" mode="out-in">
 					<img id="img" :key="imagesrc" :src="imagesrc" class="img">
 					</transition>

@@ -1,6 +1,6 @@
 <template>
     <div class="row"> 
-        <div class="col-12 no-gutters">
+        <div class="col-12 full">
             <div class="progress">
           <div class="progress-bar bg-success" role="progressbar" id="pb" v-bind:style="{width:value + '%'}" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
         </div>
@@ -27,5 +27,10 @@ export default{
     margin-top:0;
     height:10px;
     top:0;
+    border-radius:0px;
+}
+.full{
+    margin-top:0px;
+    padding:0px;
 }
 </style>
