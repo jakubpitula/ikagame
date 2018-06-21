@@ -45,7 +45,7 @@ export default {
 		},
 		getData:function(button = true){
 			let component = this;
-			fetch("/api/", {method: 'POST', credentials: 'include', body: JSON.stringify({'buttonPressed':button})}).then(function(res){
+			fetch("/api/", {method: 'POST', credentials: 'include'}).then(function(res){
 				if(res.ok){
 					res.clone().json().then(
 						js=>{component.setData(js)}, 
@@ -65,8 +65,9 @@ export default {
 			this.getData();
 		},
 		initialize:function(){
-			if(localStorage.getItem("last-person") && localStorage.getItem("results")){
-				this.results = JSON.parse(localStorage.getItem("results"));
+			if(localStorage.getItem("last-person")){
+				if(localStorage.getItem("results"))
+					this.results = JSON.parse(localStorage.getItem("results"));
 				this.setData(JSON.parse(localStorage.getItem("last-person")));
 			} else {
 				this.getData(false);
