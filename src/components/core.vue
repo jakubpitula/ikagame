@@ -25,7 +25,7 @@ export default {
 	data() {
 		return {
 			context: this,
-			person: { imie: "", nazwisko: "", addr: "" },
+			person: { imie: "", nazwisko: "", addr: "", counter:0 },
 			imie: "",
 			nazwisko: "",
 			imagesrc: ""
@@ -100,6 +100,11 @@ export default {
 		});
 		window.addEventListener("resize", ()=>{
 			document.getElementById("imgContainer").style.height = getComputedStyle(document.getElementById("imgContainer")).width;
+		});
+		let context = this;
+		window.addEventListener("beforeunload", ()=>{
+			if(person.counter <= 32)
+				localStorage.setItem("last-person", context.person);
 		});
 		document.getElementById("imgContainer").style.height = getComputedStyle(document.getElementById("imgContainer")).width;
 		this.$emit("loaded");

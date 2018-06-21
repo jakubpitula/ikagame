@@ -2,7 +2,7 @@
 	<div id="app" class="app-container container-fluid">
 		<progress_ :value ="prog"/>
 		<transition name="fade">
-		<core v-if="core_display" :bus="bus" :aliasesObj="aliasesObj" @submit="process" @loaded="getData"/>
+		<core v-if="core_display" :bus="bus" :aliasesObj="aliasesObj" @submit="process" @loaded="initialize"/>
 		<results v-if="results_display" :resultsObj="results" />
 		<div v-if="!ready_" class="spinner"><div></div><div></div><div></div></div>
 		</transition>
@@ -63,6 +63,15 @@ export default {
 		process: function(obj){
 			this.results.push(obj);
 			this.getData();
+		},
+		initialize:function(){
+			if(localStorage.getItem("last-person") && localStorage.getItem("results")){
+				this.results = localStorage.getItem("results");
+				this.setData(localStorage.getItem("last-person"));
+			} else {
+				this.getData();
+			}
+			localStorage.clear();
 		}
 	},
 	computed:{
@@ -72,6 +81,10 @@ export default {
 	},
 	mounted:function(){
 		let context = this;
+		window.addEventListener("beforeunload", ()=>{
+			if(!context.results_display)
+				localStorage.setItem("results", context.results);
+		});
 		fetch("/api/aliases.json", {method: "GET", credentials: "include"}).then(
         function(res) {
           if (res.ok) {
