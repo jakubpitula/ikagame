@@ -90,6 +90,7 @@ export default {
 			);
 			this.imie = "";
 			this.nazwisko = "";
+			document.getElementById("imie").focus();
 		}
  	},
 	mounted: function() {
