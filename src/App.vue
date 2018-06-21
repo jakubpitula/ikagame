@@ -65,6 +65,7 @@ export default {
 			this.getData();
 		},
 		initialize:function(){
+			console.log(localStorage);
 			if(localStorage.getItem("last-person") && localStorage.getItem("results")){
 				this.results = localStorage.getItem("results");
 				this.setData(localStorage.getItem("last-person"));
@@ -82,6 +83,7 @@ export default {
 	mounted:function(){
 		let context = this;
 		window.addEventListener("beforeunload", ()=>{
+			console.log(context.results_display);
 			if(!context.results_display)
 				localStorage.setItem("results", context.results);
 		});

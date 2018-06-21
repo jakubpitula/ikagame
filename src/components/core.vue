@@ -103,6 +103,7 @@ export default {
 		});
 		let context = this;
 		window.addEventListener("beforeunload", ()=>{
+			console.log(person.counter);
 			if(person.counter <= 32)
 				localStorage.setItem("last-person", context.person);
 		});
