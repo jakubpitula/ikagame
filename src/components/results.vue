@@ -4,9 +4,10 @@
 			<div class="res-container row justify-content-center align-items-center" :class="{'pad':!resultsExpanded}">
 				<div class="points col-10 col-md-7 align-self-center ">
 					<h1 v-text="points" :class="pointsTextStyle"></h1>
-					<button type="button" class="btn dropdown-toggle" :class="{'btn-outline-primary':!resultsExpanded, 'btn-primary':resultsExplained}" @click="resultsExpanded = !resultsExpanded">
-    					Szczegóły <span class="caret"></span>
-  					</button>
+					<div class="d-flex">
+						<button class="btn btn-primary mr-1" @click="reload"><i class="material-icons">refresh</i></button>
+						<button class="btn dropdown-toggle" :class="{'btn-outline-primary':!resultsExpanded, 'btn-primary':resultsExpanded}" @click="expand"></button>
+					</div>
 				</div>
 			</div>
 			<transition name="fade">
@@ -41,6 +42,14 @@ export default {
 			resultsExpanded: false
 		};
   },
+  methods:{
+	  reload:function(){
+		  window.location.reload();
+	  },
+	  expand:function(){
+		this.resultsExpanded = !this.resultsExpanded;
+	  }
+  },
   computed: {
     points: {
       cache: false,
@@ -62,8 +71,11 @@ export default {
 .points {
   max-width: 350px;
 }
-.btn{
-	width:100%;
+.btn:first-child{
+	display: flex;
+	align-items: center;
+	padding:5px 10px;
+	width:50px;
 }
 .points h1 {
   font-weight: 100;
