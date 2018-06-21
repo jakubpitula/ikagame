@@ -3,7 +3,7 @@
 		<div class="col-10 col-md-7 col-lg-5 align-self-center">
 			<div class="row justify-content-center align-items-center">
 				<div class="img-container col-7 align-self-center ">
-					<transition name="imganim" @before-enter="animationActive = true" @after-leave="animationActive = false">
+					<transition name="imganim" @before-enter="animationActive = true" @after-leave="animationActive = false" mode="out-in">
 					<img id="img" :key="imagesrc" :src="imagesrc" class="img" @load="displayImage">
 					</transition>
 				</div>
@@ -132,14 +132,14 @@ export default {
   margin-bottom: 20%;
 }
 .imganim-enter-active, .imganim-leave-active {
-  transition: all 270ms;
+  transition: all 300ms;
 	transition-property: transform, opacity, width, height;
 }
 .imganim-enter-active {
-  transition-timing-function: ease-in;
+  transition-timing-function: ease-out;
 }
 .imganim-leave-active {
-  transition-timing-function: ease-out;
+  transition-timing-function: ease-in;
 }
 .imganim-enter-to, .imganim-leave {
   opacity: 1;
