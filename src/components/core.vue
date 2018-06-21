@@ -4,7 +4,7 @@
 			<div class="row justify-content-center align-items-center">
 				<div class="img-container col-7 align-self-center ">
 					<transition name="imganim" @before-enter="animationActive = true" @after-leave="animationActive = false">
-					<img id="img" :src="imagesrc" v-show="imageActive" class="img" @load="displayImage">
+					<img id="img" :key="imagesrc" :src="imagesrc" class="img" @load="displayImage">
 					</transition>
 				</div>
 			</div>
