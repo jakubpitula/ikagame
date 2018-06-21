@@ -4,7 +4,7 @@
 			<div class="res-container row justify-content-center align-items-center" :class="{'pad':!resultsExpanded}">
 				<div class="points col-10 col-md-7 align-self-center ">
 					<h1 v-text="points" :class="pointsTextStyle"></h1>
-					<button type="button" class="btn btn-outline-primary dropdown-toggle" @click="resultsExpanded = !resultsExpanded">
+					<button type="button" class="btn dropdown-toggle" :class="{'btn-outline-primary':!resultsExpanded, 'btn-primary':resultsExplained}" @click="resultsExpanded = !resultsExpanded">
     					Szczegóły <span class="caret"></span>
   					</button>
 				</div>
@@ -89,8 +89,7 @@ export default {
 	padding-bottom:95px;
 }
 .fade-enter-active, .fade-leave-active {
-	transition: opacity .5s;
-	transition-delay:0.5s;
+	transition: opacity 300ms;
 }
 .fade-enter, .fade-leave-to {
 	opacity: 0;
