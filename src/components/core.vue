@@ -64,6 +64,8 @@ export default {
 			});
 		},
 		updateImage: function() {
+			if(this.person.addr == "")
+				return;
 			fetch("/img/" + this.person.addr, { mode: "cors" })
 			.then(
 				response => {
