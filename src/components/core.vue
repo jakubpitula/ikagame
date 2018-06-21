@@ -82,7 +82,6 @@ export default {
 				blob => {
 					let imgaddr = window.URL.createObjectURL(blob);
 					this.imagesrc = imgaddr;
-					if(document.getElementById("img").complete) this.displayImage();
 				},
 				err => {
 					this.imagesrc = "";
@@ -126,7 +125,7 @@ export default {
   margin-bottom: 20%;
 }
 .imganim-enter-active, .imganim-leave-active {
-  transition: all 300ms;
+  transition: all 370ms;
 	transition-property: transform, opacity, width, height;
 }
 .imganim-enter-active {
