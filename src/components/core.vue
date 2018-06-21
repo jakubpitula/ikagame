@@ -3,9 +3,7 @@
 		<div class="col-10 col-md-7 col-lg-5 align-self-center">
 			<div class="row justify-content-center align-items-center">
 				<div class="img-container col-7 align-self-center ">
-					<transition name="imganim">
-						<img id="img" :src="imagesrc" v-show="!imageCollapsed" class="img" @load="displayImage">
-					</transition>
+					<img id="img" :src="imagesrc" :class="{collapsed: imageCollapsed}" class="img" @load="displayImage">
 				</div>
 			</div>
 			<div class="row justify-content-center align-items-center">
@@ -116,12 +114,13 @@ export default {
   border-radius: 50%;
   max-width: 100%;
   max-height: 100%;
-  transition: transform 300ms;
+  transition: all 250ms;
   width: auto;
   height: auto;
 }
 .collapsed {
   transform: scale(0);
+	opacity:0;
 }
 .form > input[type="text"] {
   width: calc(100% - 20px);
@@ -131,12 +130,5 @@ export default {
 .form {
   margin-top: 50px;
   margin-bottom: 20%;
-}
-.imganim-enter-active, .imganim-leave-active {
-	transition: all 250ms;
-}
-.imganim-enter, .imganim-leave-to {
-	opacity: 0;
-	transform: scale(0);
 }
 </style>
