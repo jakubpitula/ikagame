@@ -3,7 +3,9 @@
 		<div class="col-10 col-md-7 col-lg-5 align-self-center">
 			<div class="row justify-content-center align-items-center">
 				<div class="img-container col-7 align-self-center ">
-					<img id="img" :src="imagesrc" :class="{collapsed: imageCollapsed}" class="img" @load="displayImage">
+					<transition name="imganim" @before-enter="animationActive = true" @after-leave="animationActive = false">
+					<img id="img" :src="imagesrc" v-show="imageActive" class="img" @load="displayImage">
+					</transition>
 				</div>
 			</div>
 			<div class="row justify-content-center align-items-center">
@@ -27,12 +29,13 @@ export default {
 			imie: "",
 			nazwisko: "",
 			imagesrc: "",
-			imageCollapsed: true
+			animationActive: false,
+			imageActive: false
 		};
   },
   methods: {
 		displayImage: function(){
-			window.setTimeout(()=>{this.imageCollapsed = false}, 200);
+			this.imageActive = true;
 		},
 		format: function(string) {
 			string = string.trim().toLowerCase();
@@ -66,7 +69,7 @@ export default {
 			});
 		},
 		updateImage: function() {
-			this.imageCollapsed = true;
+			this.imageActive = false;
 			fetch("/img/" + this.person.addr, { mode: "cors" })
 			.then(
 				response => {
@@ -85,8 +88,10 @@ export default {
 				blob => {
 					let imgaddr = window.URL.createObjectURL(blob);
 					this.imagesrc = imgaddr;
+					if(document.getElementById("img").complete) this.displayImage();
 				},
 				err => {
+					this.imagesrc = "";
 					throw new Error("There was a problem with the BLOB resource: " + err);
 				}
 			);
@@ -114,13 +119,8 @@ export default {
   border-radius: 50%;
   max-width: 100%;
   max-height: 100%;
-  transition: all 250ms;
   width: auto;
   height: auto;
-}
-.collapsed {
-  transform: scale(0);
-	opacity:0;
 }
 .form > input[type="text"] {
   width: calc(100% - 20px);
@@ -131,4 +131,23 @@ export default {
   margin-top: 50px;
   margin-bottom: 20%;
 }
+.imganim-enter-active, .imganim-leave-active {
+  transition: all 270ms;
+	transition-property: transform, opacity, width, height;
+}
+.imganim-enter-active {
+  transition-timing-function: ease-in;
+}
+.imganim-leave-active {
+  transition-timing-function: ease-out;
+}
+.imganim-enter-to, .imganim-leave {
+  opacity: 1;
+	transform: scale(1);
+}
+.imganim-enter, .imganim-leave-to{
+  opacity: 0;
+	transform: scale(0.2);
+}
+
 </style>
