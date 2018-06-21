@@ -1,12 +1,16 @@
 <template>
 	<div class="row main-form-container justify-content-center align-items-center">
 		<div class="col-12 col-md-7 col-lg-5 align-self-center">
-			<div class="row justify-content-center align-items-center">
-				<div class="points col-7 align-self-center ">
+			<div class="res-container row justify-content-center align-items-center" :class="{'pad':!resultsExpanded}">
+				<div class="points col-10 col-md-7 align-self-center ">
 					<h1 v-text="points" :class="pointsTextStyle"></h1>
+					<button type="button" class="btn btn-outline-primary dropdown-toggle" @click="resultsExpanded = !resultsExpanded">
+    					Szczegóły <span class="caret"></span>
+  					</button>
 				</div>
 			</div>
-			<div class="row justify-content-center align-items-center">
+			<transition name="fade">
+			<div v-show="resultsExpanded" class="row justify-content-center align-items-center">
 				<div class="form col-12 align-self-center">
 					<table class="table">
 						<thead>
@@ -24,6 +28,7 @@
 					</table>
 				</div>
 			</div>
+			</transition>
 		</div>
 	</div>
 </template>
@@ -31,6 +36,11 @@
 export default {
   name: "results",
   props: ["resultsObj"],
+  data() {
+		return {
+			resultsExpanded: false
+		};
+  },
   computed: {
     points: {
       cache: false,
@@ -44,14 +54,22 @@ export default {
 };
 </script>
 <style scoped>
+.res-container{
+	margin-top:0px;
+	margin-bottom:0px;
+	transition: all 300ms;
+}
 .points {
   max-width: 350px;
 }
+.btn{
+	width:100%;
+}
 .points h1 {
   font-weight: 100;
-  font-size: 4rem;
+  font-size: 55px;
   font-family: Roboto;
-  padding-top: 50px;
+  padding-top: 0;
   padding-bottom: 30px;
 }
 .main-form-container {
@@ -66,5 +84,39 @@ export default {
 }
 .red {
 	color:#E64A19;
+}
+.pad{
+	padding-bottom:95px;
+}
+.fade-enter-active, .fade-leave-active {
+	transition: opacity .5s;
+	transition-delay:0.5s;
+}
+.fade-enter, .fade-leave-to {
+	opacity: 0;
+}
+@media screen and (min-width:500px){
+	.points h1{
+		font-size: 65px;
+	}
+	.pad{
+		padding-bottom:90px;
+	}
+	.res-container{
+		margin-top:40px;
+		margin-bottom:10px;
+	}
+}
+@media screen and (min-width:1300px){
+	.points h1{
+		font-size: 80px;
+	}
+	.pad{
+		padding-bottom:70px;
+	}
+	.res-container{
+		margin-top:55px;
+		margin-bottom:30px;
+	}
 }
 </style>
