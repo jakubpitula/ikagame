@@ -103,8 +103,8 @@ export default {
 		});
 		let context = this;
 		window.addEventListener("beforeunload", ()=>{
-			console.log(person.counter);
-			if(person.counter <= 32)
+			console.log(context.person.counter);
+			if(context.person.counter <= 32)
 				localStorage.setItem("last-person", context.person);
 		});
 		document.getElementById("imgContainer").style.height = getComputedStyle(document.getElementById("imgContainer")).width;
