@@ -7,5 +7,14 @@
     {"index":"Joanna", "alias":"Asia"},
     {"index":"Magdalena", "alias":"Magda"},
     {"index":"Tymoteusz", "alias":"Pigwa"},
-    {"index":"Marcin", "alias":"Parowóz"}
+    {"index":"Marcin", "alias":"Parowóz"},
+    {"index": "Jan", "alias": "Janek"},
+    {"index": "Tymoteusz", "alias": "Tymon"},
+    {"index": "Mateusz", "alias": "Mati"},
+    {"index": "Tobiasz", "alias": "Tobi"},
+    {"index": "Joanna", "alias": "Joasia"},
+    {"index": "Dominika", "alias": "Dominisia"},
+    {"index": "Jan", "alias": "Jaś"},
+    {"index": "Jan", "alias": "Jasiu"},
+    {"index": "Helena", "alias": "Hela"}
 ]
