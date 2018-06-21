@@ -125,14 +125,15 @@ export default {
   margin-bottom: 20%;
 }
 .imganim-enter-active, .imganim-leave-active {
-  transition: all 370ms;
+  transition: all 320ms;
 	transition-property: transform, opacity, width, height;
 }
 .imganim-enter-active {
-  transition-timing-function: cubic-bezier(0.069, 0.8, 0.69, 1.44);
+  transition-timing-function: cubic-bezier(0.21, 1, 0.69, 1.47);
 }
 .imganim-leave-active {
-  transition-timing-function: cubic-bezier(0.31,-0.44,0.93,0.2);
+	transition-duration: 360ms;
+  transition-timing-function: cubic-bezier(.31,-0.47,.79,0);
 }
 .imganim-enter-to, .imganim-leave {
   opacity: 1;
