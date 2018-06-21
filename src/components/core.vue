@@ -3,8 +3,8 @@
 		<div class="col-10 col-md-7 col-lg-5 align-self-center">
 			<div class="row justify-content-center align-items-center">
 				<div class="img-container col-7 align-self-center ">
-					<transition name="imganim" @before-enter="animationActive = true" @after-leave="animationActive = false" mode="out-in">
-					<img id="img" :key="imagesrc" :src="imagesrc" class="img" @load="displayImage">
+					<transition name="imganim" mode="out-in">
+					<img id="img" :key="imagesrc" :src="imagesrc" class="img">
 					</transition>
 				</div>
 			</div>
@@ -28,15 +28,10 @@ export default {
 			person: { imie: "", nazwisko: "", addr: "" },
 			imie: "",
 			nazwisko: "",
-			imagesrc: "",
-			animationActive: false,
-			imageActive: false
+			imagesrc: ""
 		};
   },
   methods: {
-		displayImage: function(){
-			this.imageActive = true;
-		},
 		format: function(string) {
 			string = string.trim().toLowerCase();
 			return string.charAt(0).toUpperCase() + string.slice(1);
@@ -69,7 +64,6 @@ export default {
 			});
 		},
 		updateImage: function() {
-			this.imageActive = false;
 			fetch("/img/" + this.person.addr, { mode: "cors" })
 			.then(
 				response => {
@@ -136,10 +130,10 @@ export default {
 	transition-property: transform, opacity, width, height;
 }
 .imganim-enter-active {
-  transition-timing-function: ease-out;
+  transition-timing-function: cubic-bezier(0.069, 0.8, 0.69, 1.44);
 }
 .imganim-leave-active {
-  transition-timing-function: ease-in;
+  transition-timing-function: cubic-bezier(0.31,-0.44,0.93,0.2);
 }
 .imganim-enter-to, .imganim-leave {
   opacity: 1;
